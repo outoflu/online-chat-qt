@@ -15,8 +15,6 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //spdlog::set_pattern("[%Y-%m-%d %H:%M:%S.%e][%l] %v");
-    //auto logger=spdlog::stdout_color_mt("console");
     QFile qss(":/style/stylesheet.qss");
     if (qss.open(QFile::ReadOnly)){
         //logger.get()->debug("open qss file success");
