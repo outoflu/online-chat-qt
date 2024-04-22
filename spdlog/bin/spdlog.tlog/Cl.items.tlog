@@ -1,0 +1,7 @@
+F:\cpp\spdlog\src\spdlog.cpp;F:\cpp\spdlog\build\spdlog.dir\Release\spdlog.obj
+F:\cpp\spdlog\src\stdout_sinks.cpp;F:\cpp\spdlog\build\spdlog.dir\Release\stdout_sinks.obj
+F:\cpp\spdlog\src\color_sinks.cpp;F:\cpp\spdlog\build\spdlog.dir\Release\color_sinks.obj
+F:\cpp\spdlog\src\file_sinks.cpp;F:\cpp\spdlog\build\spdlog.dir\Release\file_sinks.obj
+F:\cpp\spdlog\src\async.cpp;F:\cpp\spdlog\build\spdlog.dir\Release\async.obj
+F:\cpp\spdlog\src\cfg.cpp;F:\cpp\spdlog\build\spdlog.dir\Release\cfg.obj
+F:\cpp\spdlog\src\bundled_fmtlib_format.cpp;F:\cpp\spdlog\build\spdlog.dir\Release\bundled_fmtlib_format.obj

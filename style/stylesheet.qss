@@ -1,0 +1,15 @@
+Dialog#Login,#Register{
+background-color:rgb(255,255,255)
+}
+
+#UserLabel,#PasswdLabel{
+    color:black;
+}
+
+#ErrorTipsLabel[state='normal']{
+    color:green;
+}
+
+#ErrorTipsLabel[state='error']{
+    color:red;
+}
