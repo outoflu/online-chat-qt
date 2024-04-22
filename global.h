@@ -7,6 +7,9 @@
 #include <QByteArray>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QJsonObject>
+#include <QDir>
+#include <QSettings>
 
 extern std::function<void(QWidget*)> repolish;
 
@@ -25,4 +28,5 @@ enum ErrorCodes{
     ERR_NETWORK=2,//网络错误
 };
 
+extern QString GateUrlPrefix;
 #endif // GLOBAL_H

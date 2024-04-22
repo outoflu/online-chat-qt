@@ -23,7 +23,7 @@ private:
     void show_tips(const QString&,bool);
     void show_normal_tips(const QString&);
     void show_error_tips(const QString&);
-    QMap<ReqId,std::function<void(const QJsonObject&)>> _handlers;
+    QMap<ReqId,std::function<void(QJsonObject)>> _handlers;
 
 private:
     Ui::Register *ui;

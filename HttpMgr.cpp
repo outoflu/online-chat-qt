@@ -22,6 +22,7 @@ void HttpMgr::post_http_request(QUrl url, QJsonObject json, ReqId req_id, Module
         QString res=reply->readAll();
         emit self->sig_http_finish(req_id,res,ErrorCodes::SUCCESS,mod);
         reply->deleteLater();
+        return ;
     });
 }
 

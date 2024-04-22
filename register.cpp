@@ -15,6 +15,7 @@ Register::Register(QWidget *parent) :
     connect(ui->GetCodeButton,&QPushButton::clicked,this,&Register::on_get_code_clicked);
     repolish(this);
     connect(HttpMgr::getInstance().get(),&HttpMgr::sig_reg_mod_finish,this,&Register::slot_reg_mod_finish);
+    initHttpHandlers();
 }
 
 Register::~Register()
@@ -24,14 +25,15 @@ Register::~Register()
 
 void Register::initHttpHandlers()
 {
-    _handlers.insert(ReqId::ID_GET_VARIFY_CODE,[this](const QJsonObject& jsonObj){
+    _handlers.insert(ReqId::ID_GET_VARIFY_CODE,[this](QJsonObject jsonObj){
         int error=jsonObj["error"].toInt();
         if (error!=ErrorCodes::SUCCESS){
             show_error_tips(tr("参数错误"));
             return ;
         }
-        auto email=jsonObj["email"].toString();
+        //auto email=jsonObj["email"].toString();
         show_normal_tips(tr("验证码已经发送，注意接收"));
+        return ;
 
     });
 }
@@ -43,6 +45,10 @@ void Register::on_get_code_clicked(){
     auto match=emailRegex.match(email).hasMatch();
     if (match) {
         //发送HTTP请求验证码
+        QJsonObject json_obj;
+        json_obj["email"]=email;
+        HttpMgr::getInstance()->post_http_request(QUrl(GateUrlPrefix+"/get_varifycode"),
+                                            json_obj,ReqId::ID_GET_VARIFY_CODE,Modules::REGISTERMOD);
     }else {
         show_error_tips(tr("非法的邮箱号"));
     }
@@ -55,7 +61,7 @@ void Register::slot_reg_mod_finish(ReqId id, QString res, ErrorCodes err_code)
         return ;
     }
     QJsonDocument jsonDoc=QJsonDocument::fromJson(res.toUtf8());
-    if (jsonDoc.isEmpty()){
+    if (jsonDoc.isNull()){
         show_error_tips(tr("Json解析失败"));
         return ;
     }
@@ -64,7 +70,12 @@ void Register::slot_reg_mod_finish(ReqId id, QString res, ErrorCodes err_code)
     }
 
     //jsonDoc.object();
-    _handlers[id](jsonDoc.object());
+    try {
+        _handlers[id](jsonDoc.object());
+    }catch(std::exception& e ){
+        std::cout<<e.what()<<std::endl;
+    }
+
     return ;
 }
 
