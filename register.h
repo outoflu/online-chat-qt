@@ -17,8 +17,12 @@ public:
     ~Register();
     void initHttpHandlers();
 public slots:
-    void on_get_code_clicked();
+    void slot_on_get_code_clicked();
     void slot_reg_mod_finish(ReqId id,QString res,ErrorCodes err_code);
+    void slot_on_confirmbtn_clicked();
+private slots:
+    void on_ConfirmBtn_clicked();
+
 private:
     void show_tips(const QString&,bool);
     void show_normal_tips(const QString&);
