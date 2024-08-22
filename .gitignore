@@ -1,3 +1,7 @@
 spdlog/*
 !spdlog/.gitkeep
 /.vscode
+/.vs
+/bin
+/debug
+/release

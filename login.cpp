@@ -1,4 +1,5 @@
 #include "login.h"
+#include "qpushbutton.h"
 #include "ui_login.h"
 
 Login::Login(QWidget *parent) :
@@ -7,7 +8,12 @@ Login::Login(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->RegisterButton,&QPushButton::clicked,this,&Login::switch_register);
-    ui->PasswdEdit->setEchoMode(QLineEdit::Password);
+    //connect(ui->ForgetPasswdLabel,&QLabel::clicked,this,&Login::slot_forget_pwd);
+}
+
+void Login::slot_forget_pwd(){
+    qDebug()<<"slot forget pwd";
+    emit switch_reset();
 }
 
 Login::~Login()

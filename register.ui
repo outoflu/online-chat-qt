@@ -213,6 +213,25 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="ClickedLabel" name="PasswdVisiable">
+             <property name="minimumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
@@ -249,6 +268,25 @@
                <width>16777215</width>
                <height>25</height>
               </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="ClickedLabel" name="ConfirmPasswdVisiable">
+             <property name="minimumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
              </property>
             </widget>
            </item>
@@ -382,13 +420,32 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="page_2"/>
+       <widget class="QWidget" name="page_2">
+        <widget class="QWidget" name="verticalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>261</width>
+           <height>321</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3"/>
+        </widget>
+       </widget>
       </widget>
      </item>
     </layout>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ClickedLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">clickedlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -18,6 +18,9 @@ private:
     Ui::Login *ui;
 signals:
     void switch_register();
+    void switch_reset();
+public slots:
+    void slot_forget_pwd();
 };
 
 #endif // LOGIN_H

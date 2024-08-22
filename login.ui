@@ -121,7 +121,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="ForgetPasswdLabel">
+       <widget class="ClickedLabel" name="ForgetPasswdLabel">
         <property name="text">
          <string>忘记密码</string>
         </property>
@@ -232,6 +232,13 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ClickedLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">clickedlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="rc.qrc"/>
  </resources>
