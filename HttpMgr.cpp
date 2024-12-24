@@ -31,6 +31,12 @@ void HttpMgr::slot_http_finish(ReqId id, QString res, ErrorCodes err_code, Modul
     if (mod==Modules::REGISTERMOD){
         emit sig_reg_mod_finish(id,res,err_code);
     }
+    if (mod == Modules::RESETMOD) {
+        emit sig_reset_mod_finish(id, res, err_code);
+    }
+    if (mod == Modules::LOGINMOD) {
+        emit sig_login_mod_finish(id, res, err_code);
+    }
 }
 
 HttpMgr::~HttpMgr(){

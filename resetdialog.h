@@ -23,7 +23,7 @@ public:
     static const QRegularExpression emailRegex;
 public slots:
     void slot_on_get_code_clicked();
-    void slot_reg_mod_finish(ReqId id,QString res,ErrorCodes err_code);
+    void slot_reset_mod_finish(ReqId id,QString res,ErrorCodes err_code);
     void slot_on_confirmbtn_clicked();
     void slot_check_user_valid();
     void slot_check_mail_valid();
@@ -41,7 +41,9 @@ private:
     bool check_verifycode_valid();
     QMap<ReqId,std::function<void(QJsonObject)>> _handlers;
     QMap<TipErr,QString> _tip_errs;
-
+    void change_tip_page();
+    QTimer* _countdown_timer;
+    int _countdown;
 private:
     Ui::ResetDialog *ui;
 signals:

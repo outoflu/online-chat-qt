@@ -36,22 +36,22 @@ Register::Register(QWidget *parent) :
 
     connect(ui->GetCodeButton,&QPushButton::clicked,this,&Register::slot_on_get_code_clicked);
     connect(ui->ConfirmBtn,&QPushButton::clicked,this,&Register::slot_on_confirmbtn_clicked);
-    repolish(this);
+    //repolish(this);
     connect(HttpMgr::getInstance().get(),&HttpMgr::sig_reg_mod_finish,this,&Register::slot_reg_mod_finish);
     initHttpHandlers();
 
-    ui->PasswdVisiable->setCursor(Qt::PointingHandCursor);
-    ui->ConfirmPasswdVisiable->setCursor(Qt::PointingHandCursor);
+    ui->PasswdVisible->setCursor(Qt::PointingHandCursor);
+    ui->ConfirmPasswdVisible->setCursor(Qt::PointingHandCursor);
 
-    ui->PasswdVisiable->SetState("unvisible", "unvisible_hover", "", "visible",
+    ui->PasswdVisible->SetState("unvisible", "unvisible_hover", "", "visible",
         "visible_hover", "");
 
-    ui->ConfirmPasswdVisiable->SetState("unvisible", "unvisible_hover", "", "visible",
+    ui->ConfirmPasswdVisible->SetState("unvisible", "unvisible_hover", "", "visible",
         "visible_hover", "");
     //连接点击事件
 
-    connect(ui->PasswdVisiable, &ClickedLabel::clicked, this, [this]() {
-        auto state = ui->PasswdVisiable->GetCurState();
+    connect(ui->PasswdVisible, &ClickedLabel::clicked, this, [this]() {
+        auto state = ui->PasswdVisible->GetCurState();
         if (state == ClickLbState::Normal) {
             ui->PasswdEdit->setEchoMode(QLineEdit::Password);
         }
@@ -61,8 +61,8 @@ Register::Register(QWidget *parent) :
         qDebug() << "Label was clicked!";
         });
 
-    connect(ui->ConfirmPasswdVisiable, &ClickedLabel::clicked, this, [this]() {
-        auto state = ui->ConfirmPasswdVisiable->GetCurState();
+    connect(ui->ConfirmPasswdVisible, &ClickedLabel::clicked, this, [this]() {
+        auto state = ui->ConfirmPasswdVisible->GetCurState();
         if (state == ClickLbState::Normal) {
             ui->ConfirmPasswdEdit->setEchoMode(QLineEdit::Password);
         }
@@ -74,8 +74,8 @@ Register::Register(QWidget *parent) :
 
     _countdown_timer = new QTimer(this);
     // 连接信号和槽
-    int _countdown = 5;
-    connect(_countdown_timer, &QTimer::timeout, [this,&_countdown]() {
+    _countdown = 5;
+    connect(_countdown_timer, &QTimer::timeout, [this]() {
         if (_countdown == 0) {
             _countdown_timer->stop();
             emit sigSwitchLogin();
@@ -85,6 +85,9 @@ Register::Register(QWidget *parent) :
         auto str = QString("注册成功，%1 s后返回登录").arg(_countdown);
         ui->tip_lb->setText(str);
         });
+
+    connect(ui->CancelBtn,&QPushButton::clicked,this,&Register::slot_switch_login);
+    connect(ui->return_btn,&QPushButton::clicked,this,&Register::slot_switch_login);
 }
 
 Register::~Register()
@@ -113,6 +116,7 @@ void Register::initHttpHandlers()
         }else {
             auto email = jsonObj["email"].toString();
             show_normal_tips(tr("用户注册成功"));
+            chang_tip_page();
             qDebug()<< "email is " << email ;
         }
     });
@@ -178,6 +182,7 @@ void Register::slot_on_confirmbtn_clicked(){
         return ;
     }else {
         QJsonObject json_obj;
+        //json_obj["live"] = QString("live");
         json_obj["user"]=ui->UserEdit->text();
         json_obj["email"]=ui->MailEdit->text();
         json_obj["password"]=ui->PasswdEdit->text();
@@ -207,35 +212,130 @@ void Register::show_error_tips(const QString& error_tips){
     repolish(ui->ErrorTipsLabel);
 }
 
-void Register::slot_check_user_valid(){
-    if (ui->UserEdit->text()==""){
-        show_error_tips(tr("用户名不能为空"));
-        return ;
-    }else if (ui->UserEdit->text().size()>255){
-        show_error_tips(tr("过长的用户名"));
-    }else {
-        show_normal_tips(tr("合法的用户名"));
+void Register::add_tip_err(TipErr te, const QString& tips)
+{
+    _tip_errs[te] = tips;
+    show_error_tips(tips);
+}
+
+void Register::del_tip_err(TipErr te)
+{
+    _tip_errs.remove(te); //QMap::remove在Key不存在时只会返回0
+    if (_tip_errs.empty()) {
+        ui->ErrorTipsLabel->clear();
+        return;
     }
+    show_error_tips(_tip_errs.first());
+}
+
+bool Register::check_user_valid()
+{
+    if (ui->UserEdit->text() == "") {
+        add_tip_err(TipErr::TIP_USER_ERR, tr("用户名不能为空"));
+        return false;
+    }
+    del_tip_err(TipErr::TIP_USER_ERR);
+    return true;
+}
+
+bool Register::check_email_valid()
+{
+    //验证邮箱的地址正则表达式
+    auto email = ui->MailEdit->text();
+    // 邮箱地址的正则表达式
+    bool match = this->emailRegex.match(email).hasMatch(); // 执行正则表达式匹配
+    if (!match) {
+        //提示邮箱不正确
+        add_tip_err(TipErr::TIP_EMAIL_ERR, tr("邮箱地址不正确"));
+        return false;
+    }
+
+    del_tip_err(TipErr::TIP_EMAIL_ERR);
+    return true;
+}
+
+bool Register::check_passwd_valid()
+{
+    auto pass = ui->PasswdEdit->text();
+
+    if (pass.length() < 6 || pass.length() > 15) {
+        //提示长度不准确
+        add_tip_err(TipErr::TIP_PWD_ERR, tr("密码长度应为6~15"));
+        return false;
+    }
+
+    // 创建一个正则表达式对象，按照上述密码要求
+    // 这个正则表达式解释：
+    // ^[a-zA-Z0-9!@#$%^&*]{6,15}$ 密码长度至少6，可以是字母、数字和特定的特殊字符
+    static QRegularExpression regExp("^[a-zA-Z0-9!@#$%^&*]{6,15}$");
+    bool match = regExp.match(pass).hasMatch();
+    if (!match) {
+        //提示字符非法
+        add_tip_err(TipErr::TIP_PWD_ERR, tr("不能包含非法字符"));
+        return false;;
+    }
+
+    del_tip_err(TipErr::TIP_PWD_ERR);
+
+    return true;
+}
+
+bool Register::check_confirmpasswd_valid()
+{
+    auto passwd = ui->PasswdEdit->text();
+    auto passwd2 = ui->ConfirmPasswdEdit->text();
+    if (passwd == passwd2) {
+        del_tip_err(TipErr::TIP_CONFIRM_ERR);
+        return true;
+    }
+    else {
+        add_tip_err(TipErr::TIP_CONFIRM_ERR,tr("前后密码不一致"));
+        return false;
+    }
+
+}
+
+bool Register::check_verifycode_valid()
+{
+    auto pass = ui->CodeEdit->text();
+    if (pass.isEmpty()) {
+        add_tip_err(TipErr::TIP_VARIFY_ERR, tr("验证码不能为空"));
+        return false;
+    }
+
+    del_tip_err(TipErr::TIP_VARIFY_ERR);
+    return true;
+}
+void Register::chang_tip_page()
+{
+    _countdown_timer->stop();
+    ui->stackedWidget->setCurrentWidget(ui->page_2);
+
+    _countdown_timer->start(1000);
+    // 启动定时器，设置间隔为1000毫秒（1秒）
+    
+}
+
+void Register::slot_check_user_valid(){
+    check_user_valid();
 }
 void Register::slot_check_mail_valid(){
-    auto email=ui->MailEdit->text();
-    //QRegularExpression regex(R"((\w+)(\.|\_)?(\w*)@(\w+)(\.(\w+))+)");
-    //static QRegularExpression emailRegex(R"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})");
-    auto match=emailRegex.match(email).hasMatch();
-    if (!match){
-
-    }else{
-
-    }
+    check_email_valid();
 }
 void Register::slot_check_passwd_valid(){
-
+    check_passwd_valid();
 }
 void Register::slot_check_confirmpasswd_valid(){
-
+    check_confirmpasswd_valid();
 }
 void Register::slot_check_verifycode_valid(){
+    check_verifycode_valid();
+}
 
+void Register::slot_switch_login()
+{
+    _countdown_timer->stop();
+    emit sigSwitchLogin();
 }
 
 

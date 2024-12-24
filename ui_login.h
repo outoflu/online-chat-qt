@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'login.ui'
 **
-** Created by: Qt User Interface Compiler version 6.5.0
+** Created by: Qt User Interface Compiler version 6.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -19,7 +19,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include <clickedlabel.h>
+#include "clickedlabel.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -29,14 +29,16 @@ public:
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
-    QLabel *label;
+    QLabel *ErrorTipsLabel;
     QSpacerItem *verticalSpacer;
+    QLabel *label_2;
     QHBoxLayout *horizontalLayout_2;
     QLabel *UserLabel;
     QLineEdit *UserEdit;
     QHBoxLayout *horizontalLayout_3;
     QLabel *PasswdLabel;
     QLineEdit *PasswdEdit;
+    ClickedLabel *PasswdVisible;
     QHBoxLayout *horizontalLayout_8;
     QSpacerItem *horizontalSpacer_3;
     ClickedLabel *ForgetPasswdLabel;
@@ -55,7 +57,7 @@ public:
     {
         if (Login->objectName().isEmpty())
             Login->setObjectName("Login");
-        Login->setWindowModality(Qt::NonModal);
+        Login->setWindowModality(Qt::WindowModality::NonModal);
         Login->resize(300, 500);
         Login->setMinimumSize(QSize(300, 500));
         Login->setMaximumSize(QSize(300, 500));
@@ -65,24 +67,30 @@ public:
         verticalLayoutWidget->setGeometry(QRect(0, 0, 302, 446));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setObjectName("verticalLayout");
-        verticalLayout->setSizeConstraint(QLayout::SetMaximumSize);
+        verticalLayout->setSizeConstraint(QLayout::SizeConstraint::SetMaximumSize);
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        horizontalLayout->setSizeConstraint(QLayout::SetMaximumSize);
-        label = new QLabel(verticalLayoutWidget);
-        label->setObjectName("label");
-        label->setPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/resource/ice.png")));
-        label->setAlignment(Qt::AlignCenter);
+        horizontalLayout->setSizeConstraint(QLayout::SizeConstraint::SetMaximumSize);
+        ErrorTipsLabel = new QLabel(verticalLayoutWidget);
+        ErrorTipsLabel->setObjectName("ErrorTipsLabel");
+        ErrorTipsLabel->setPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/resource/ice.png")));
+        ErrorTipsLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        horizontalLayout->addWidget(label);
+        horizontalLayout->addWidget(ErrorTipsLabel);
 
 
         verticalLayout->addLayout(horizontalLayout);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         verticalLayout->addItem(verticalSpacer);
+
+        label_2 = new QLabel(verticalLayoutWidget);
+        label_2->setObjectName("label_2");
+        label_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout->addWidget(label_2);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
@@ -111,6 +119,13 @@ public:
 
         horizontalLayout_3->addWidget(PasswdEdit);
 
+        PasswdVisible = new ClickedLabel(verticalLayoutWidget);
+        PasswdVisible->setObjectName("PasswdVisible");
+        PasswdVisible->setMinimumSize(QSize(20, 20));
+        PasswdVisible->setMaximumSize(QSize(20, 20));
+
+        horizontalLayout_3->addWidget(PasswdVisible);
+
 
         verticalLayout->addLayout(horizontalLayout_3);
 
@@ -128,7 +143,7 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_8);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         verticalLayout->addItem(verticalSpacer_3);
 
@@ -168,7 +183,7 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_7);
 
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         verticalLayout->addItem(verticalSpacer_2);
 
@@ -181,9 +196,11 @@ public:
     void retranslateUi(QDialog *Login)
     {
         Login->setWindowTitle(QCoreApplication::translate("Login", "Dialog", nullptr));
-        label->setText(QString());
+        ErrorTipsLabel->setText(QString());
+        label_2->setText(QCoreApplication::translate("Login", "\351\224\231\350\257\257\346\217\220\347\244\272", nullptr));
         UserLabel->setText(QCoreApplication::translate("Login", "\347\224\250\346\210\267\357\274\232", nullptr));
         PasswdLabel->setText(QCoreApplication::translate("Login", "\345\257\206\347\240\201\357\274\232", nullptr));
+        PasswdVisible->setText(QString());
         ForgetPasswdLabel->setText(QCoreApplication::translate("Login", "\345\277\230\350\256\260\345\257\206\347\240\201", nullptr));
         RegisterButton->setText(QCoreApplication::translate("Login", "\346\263\250\345\206\214", nullptr));
         LoginButton->setText(QCoreApplication::translate("Login", "\347\231\273\345\275\225", nullptr));

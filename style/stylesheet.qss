@@ -14,35 +14,35 @@ background-color:rgb(255,255,255)
     color:red;
 }
 
-#pass_visible[state='unvisible']{
-   border-image: url(:/res/unvisible.png);
+#PasswdVisible[state='unvisible']{
+   border-image: url(:/res/resource/unvisible.png);
 }
 
-#pass_visible[state='unvisible_hover']{
-   border-image: url(:/res/unvisible_hover.png);
+#PasswdVisible[state='unvisible_hover']{
+   border-image: url(:/res/resource/unvisible_hover.png);
 }
 
-#pass_visible[state='visible']{
-   border-image: url(:/res/visible.png);
+#PasswdVisible[state='visible']{
+   border-image: url(:/res/resource/visible.png);
 }
 
-#pass_visible[state='visible_hover']{
-   border-image: url(:/res/visible_hover.png);
+#PasswdVisible[state='visible_hover']{
+   border-image: url(:/res/resource/visible_hover.png);
 }
 
 
-#confirm_visible[state='unvisible']{
-   border-image: url(:/res/unvisible.png);
+#ConfirmPasswdVisible[state='unvisible']{
+   border-image: url(:/res/resource/unvisible.png);
 }
 
-#confirm_visible[state='unvisible_hover']{
-   border-image: url(:/res/unvisible_hover.png);
+#ConfirmPasswdVisible[state='unvisible_hover']{
+   border-image: url(:/res/resource/unvisible_hover.png);
 }
 
-#confirm_visible[state='visible']{
-   border-image: url(:/res/visible.png);
+#ConfirmPasswdVisible[state='visible']{
+   border-image: url(:/res/resource/visible.png);
 }
 
-#confirm_visible[state='visible_hover']{
-   border-image: url(:/res/visible_hover.png);
+#ConfirmPasswdVisible[state='visible_hover']{
+   border-image: url(:/res/resource/visible_hover.png);
 }

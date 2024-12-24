@@ -161,8 +161,6 @@
     <None Include="resource\visible_hover.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resource\icon.ico" />
-    <None Include="style\stylesheet.qss" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.ini">

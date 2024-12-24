@@ -13,13 +13,18 @@
 
 extern std::function<void(QWidget*)> repolish;
 
-enum ReqId{
-    ID_GET_VARIFY_CODE=1001,//获取验证码
-    ID_REG_USER=1002,
+enum ReqId {
+    ID_GET_VARIFY_CODE = 1001,//获取验证码
+    ID_REG_USER = 1002,
+    ID_LOGIN_USER = 1003,
+    ID_RESET_PWD=1004,
+    ID_RESET_USER = 1005
 };
 
 enum Modules{
     REGISTERMOD=0,//注册用户
+    RESETMOD=1,//
+    LOGINMOD=2,
 };
 
 enum ErrorCodes{

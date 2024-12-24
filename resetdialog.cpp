@@ -34,9 +34,46 @@ ResetDialog::ResetDialog(QWidget *parent) :
 
     connect(ui->GetCodeButton,&QPushButton::clicked,this,&ResetDialog::slot_on_get_code_clicked);
     connect(ui->ConfirmBtn,&QPushButton::clicked,this,&ResetDialog::slot_on_confirmbtn_clicked);
+
+    ui->PasswdVisible->SetState("unvisible", "unvisible_hover", "", "visible","visible_hover", "");
+    //连接点击事件
+    
+    connect(ui->PasswdVisible, &ClickedLabel::clicked, this, [this]() {
+        auto state = ui->PasswdVisible->GetCurState();
+        if (state == ClickLbState::Normal) {
+            ui->PasswdEdit->setEchoMode(QLineEdit::Password);
+        }
+        else {
+            ui->PasswdEdit->setEchoMode(QLineEdit::Normal);
+        }
+        qDebug() << "Label was clicked!";
+    });
     repolish(this);
-    connect(HttpMgr::getInstance().get(),&HttpMgr::sig_reg_mod_finish,this,&ResetDialog::slot_reg_mod_finish);
+    connect(HttpMgr::getInstance().get(),&HttpMgr::sig_reset_mod_finish,this,&ResetDialog::slot_reset_mod_finish);
     initHttpHandlers();
+    //ui->stackedWidget->setCurrentIndex(0);
+
+    _countdown_timer = new QTimer(this);
+    _countdown = 5;
+    connect(_countdown_timer, &QTimer::timeout, this, [this]() {
+        if (_countdown == 0) {
+            _countdown_timer->stop();
+            emit switch_login();
+            return;
+        }
+        _countdown--;
+        auto str = QString("重置成功，%1 s后返回登录").arg(_countdown);
+        ui->ReturnTipLabel->setText(str);
+        });
+    connect(ui->ReturnBtn, &QPushButton::clicked, this, [this]() {
+        _countdown_timer->stop();
+        emit ResetDialog::switch_login();
+        });
+
+    connect(ui->CancelBtn,&QPushButton::clicked,this,[this](){
+        _countdown_timer->stop();
+        emit ResetDialog::switch_login();
+    });
 }
 
 ResetDialog::~ResetDialog()
@@ -57,16 +94,18 @@ void ResetDialog::initHttpHandlers()
         return ;
 
     });
-    _handlers.insert(ReqId::ID_REG_USER,[this](QJsonObject jsonObj){
-        int error=jsonObj["error"].toInt();
-        if (error!=ErrorCodes::SUCCESS){
-            show_error_tips(tr("参数错误"));
-            return ;
-        }else {
-            auto email = jsonObj["email"].toString();
-            show_normal_tips(tr("用户注册成功"));
-            qDebug()<< "email is " << email ;
+    //注册注册用户回包逻辑
+    _handlers.insert(ReqId::ID_RESET_PWD, [this](QJsonObject jsonObj){
+        int error = jsonObj["error"].toInt();
+        if(error != ErrorCodes::SUCCESS){
+            show_tips(tr("参数错误"),false);
+            return;
         }
+        auto email = jsonObj["email"].toString();
+        show_tips(tr("重置成功,点击返回登录"), true);
+        change_tip_page();
+        qDebug()<< "email is " << email ;
+        qDebug()<< "user uuid is " <<  jsonObj["uuid"].toString();
     });
 }
 
@@ -80,13 +119,13 @@ void ResetDialog::slot_on_get_code_clicked(){
         QJsonObject json_obj;
         json_obj["email"]=email;
         HttpMgr::getInstance()->post_http_request(QUrl(GateUrlPrefix+"/get_varifycode"),
-                                                  json_obj,ReqId::ID_GET_VARIFY_CODE,Modules::REGISTERMOD);
+                                                  json_obj,ReqId::ID_GET_VARIFY_CODE,Modules::RESETMOD);
     }else {
         show_error_tips(tr("非法的邮箱号"));
     }
 }
 
-void ResetDialog::slot_reg_mod_finish(ReqId id, QString res, ErrorCodes err_code)
+void ResetDialog::slot_reset_mod_finish(ReqId id, QString res, ErrorCodes err_code)
 {
     if (err_code!=ErrorCodes::SUCCESS){
         show_error_tips(tr("网络请求错误"));
@@ -134,10 +173,10 @@ void ResetDialog::slot_on_confirmbtn_clicked(){
     QJsonObject json_obj;
     json_obj["user"]=ui->UserEdit->text();
     json_obj["email"]=ui->MailEdit->text();
-    json_obj["password"]=ui->PasswdEdit->text();
+    json_obj["passwd"]=ui->PasswdEdit->text();
     json_obj["varifycode"]=ui->CodeEdit->text();
     HttpMgr::getInstance()->post_http_request(
-            QUrl(GateUrlPrefix+"/user_ResetDialog"),json_obj,ReqId::ID_REG_USER,Modules::REGISTERMOD);
+            QUrl(GateUrlPrefix+"/reset_pwd"),json_obj,ReqId::ID_RESET_PWD,Modules::RESETMOD);
 }
 
 
@@ -238,6 +277,15 @@ bool ResetDialog::check_verifycode_valid()
 
     del_tip_err(TipErr::TIP_VARIFY_ERR);
     return true;
+}
+
+void ResetDialog::change_tip_page()
+{
+    _countdown_timer->stop();
+    ui->stackedWidget->setCurrentWidget(ui->page_2);
+
+    // 启动定时器，设置间隔为1000毫秒（1秒）
+    _countdown_timer->start(1000);
 }
 
 void ResetDialog::slot_check_user_valid(){

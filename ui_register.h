@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'register.ui'
 **
-** Created by: Qt User Interface Compiler version 6.5.0
+** Created by: Qt User Interface Compiler version 6.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -20,7 +20,8 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include <clickedlabel.h>
+#include "clickedlabel.h"
+#include "timebtn.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -28,12 +29,12 @@ class Ui_Register
 {
 public:
     QHBoxLayout *horizontalLayout;
-    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_9;
     QStackedWidget *stackedWidget;
     QWidget *page;
-    QVBoxLayout *verticalLayout_2;
+    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout_4;
     QSpacerItem *verticalSpacer;
-    QWidget *ErrorTipswidget;
     QLabel *ErrorTipsLabel;
     QHBoxLayout *horizontalLayout_2;
     QLabel *UserLabel;
@@ -44,23 +45,32 @@ public:
     QHBoxLayout *horizontalLayout_5;
     QLabel *PasswdLabel;
     QLineEdit *PasswdEdit;
-    ClickedLabel *PasswdVisiable;
+    ClickedLabel *PasswdVisible;
     QHBoxLayout *horizontalLayout_7;
     QLabel *ConfirmPasswdLabel;
     QLineEdit *ConfirmPasswdEdit;
-    ClickedLabel *ConfirmPasswdVisiable;
+    ClickedLabel *ConfirmPasswdVisible;
     QHBoxLayout *horizontalLayout_8;
     QLabel *Codelabel;
     QLineEdit *CodeEdit;
-    QPushButton *GetCodeButton;
-    QSpacerItem *verticalSpacer_2;
+    TimeBtn *GetCodeButton;
+    QSpacerItem *verticalSpacer_3;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *ConfirmBtn;
     QPushButton *CancelBtn;
-    QSpacerItem *verticalSpacer_3;
+    QSpacerItem *verticalSpacer_2;
     QWidget *page_2;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout_3;
+    QSpacerItem *verticalSpacer_5;
+    QLabel *tip_lb;
+    QLabel *label_2;
+    QSpacerItem *verticalSpacer_4;
+    QHBoxLayout *horizontalLayout_6;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *return_btn;
+    QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *verticalSpacer_6;
 
     void setupUi(QDialog *Register)
     {
@@ -71,43 +81,41 @@ public:
         Register->setMaximumSize(QSize(300, 500));
         horizontalLayout = new QHBoxLayout(Register);
         horizontalLayout->setObjectName("horizontalLayout");
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName("verticalLayout");
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName("horizontalLayout_9");
         stackedWidget = new QStackedWidget(Register);
         stackedWidget->setObjectName("stackedWidget");
         page = new QWidget();
         page->setObjectName("page");
-        verticalLayout_2 = new QVBoxLayout(page);
-        verticalLayout_2->setObjectName("verticalLayout_2");
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        layoutWidget = new QWidget(page);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(-4, -4, 291, 491));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget);
+        verticalLayout_4->setObjectName("verticalLayout_4");
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        verticalLayout_2->addItem(verticalSpacer);
+        verticalLayout_4->addItem(verticalSpacer);
 
-        ErrorTipswidget = new QWidget(page);
-        ErrorTipswidget->setObjectName("ErrorTipswidget");
-        ErrorTipswidget->setEnabled(true);
-        ErrorTipswidget->setMinimumSize(QSize(300, 25));
-        ErrorTipswidget->setMaximumSize(QSize(300, 25));
-        ErrorTipsLabel = new QLabel(ErrorTipswidget);
+        ErrorTipsLabel = new QLabel(layoutWidget);
         ErrorTipsLabel->setObjectName("ErrorTipsLabel");
-        ErrorTipsLabel->setGeometry(QRect(0, 0, 300, 25));
-        ErrorTipsLabel->setMinimumSize(QSize(300, 25));
-        ErrorTipsLabel->setMaximumSize(QSize(300, 25));
-        ErrorTipsLabel->setAlignment(Qt::AlignCenter);
+        ErrorTipsLabel->setMinimumSize(QSize(0, 25));
+        ErrorTipsLabel->setMaximumSize(QSize(400, 25));
+        ErrorTipsLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        verticalLayout_2->addWidget(ErrorTipswidget);
+        verticalLayout_4->addWidget(ErrorTipsLabel);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        UserLabel = new QLabel(page);
+        UserLabel = new QLabel(layoutWidget);
         UserLabel->setObjectName("UserLabel");
         UserLabel->setMinimumSize(QSize(0, 25));
         UserLabel->setMaximumSize(QSize(16777215, 25));
-        UserLabel->setTextInteractionFlags(Qt::NoTextInteraction);
+        UserLabel->setTextInteractionFlags(Qt::TextInteractionFlag::NoTextInteraction);
 
         horizontalLayout_2->addWidget(UserLabel);
 
-        UserEdit = new QLineEdit(page);
+        UserEdit = new QLineEdit(layoutWidget);
         UserEdit->setObjectName("UserEdit");
         UserEdit->setMinimumSize(QSize(0, 25));
         UserEdit->setMaximumSize(QSize(16777215, 25));
@@ -115,18 +123,18 @@ public:
         horizontalLayout_2->addWidget(UserEdit);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_2);
+        verticalLayout_4->addLayout(horizontalLayout_2);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        MailLabel = new QLabel(page);
+        MailLabel = new QLabel(layoutWidget);
         MailLabel->setObjectName("MailLabel");
         MailLabel->setMinimumSize(QSize(0, 25));
         MailLabel->setMaximumSize(QSize(16777215, 25));
 
         horizontalLayout_4->addWidget(MailLabel);
 
-        MailEdit = new QLineEdit(page);
+        MailEdit = new QLineEdit(layoutWidget);
         MailEdit->setObjectName("MailEdit");
         MailEdit->setMinimumSize(QSize(0, 25));
         MailEdit->setMaximumSize(QSize(16777215, 25));
@@ -134,77 +142,77 @@ public:
         horizontalLayout_4->addWidget(MailEdit);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_4);
+        verticalLayout_4->addLayout(horizontalLayout_4);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName("horizontalLayout_5");
-        PasswdLabel = new QLabel(page);
+        PasswdLabel = new QLabel(layoutWidget);
         PasswdLabel->setObjectName("PasswdLabel");
         PasswdLabel->setMinimumSize(QSize(0, 25));
         PasswdLabel->setMaximumSize(QSize(16777215, 25));
 
         horizontalLayout_5->addWidget(PasswdLabel);
 
-        PasswdEdit = new QLineEdit(page);
+        PasswdEdit = new QLineEdit(layoutWidget);
         PasswdEdit->setObjectName("PasswdEdit");
         PasswdEdit->setMinimumSize(QSize(0, 25));
         PasswdEdit->setMaximumSize(QSize(16777215, 25));
 
         horizontalLayout_5->addWidget(PasswdEdit);
 
-        PasswdVisiable = new ClickedLabel(page);
-        PasswdVisiable->setObjectName("PasswdVisiable");
-        PasswdVisiable->setMinimumSize(QSize(20, 20));
-        PasswdVisiable->setMaximumSize(QSize(20, 20));
+        PasswdVisible = new ClickedLabel(layoutWidget);
+        PasswdVisible->setObjectName("PasswdVisible");
+        PasswdVisible->setMinimumSize(QSize(20, 20));
+        PasswdVisible->setMaximumSize(QSize(20, 20));
 
-        horizontalLayout_5->addWidget(PasswdVisiable);
+        horizontalLayout_5->addWidget(PasswdVisible);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_5);
+        verticalLayout_4->addLayout(horizontalLayout_5);
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName("horizontalLayout_7");
-        ConfirmPasswdLabel = new QLabel(page);
+        ConfirmPasswdLabel = new QLabel(layoutWidget);
         ConfirmPasswdLabel->setObjectName("ConfirmPasswdLabel");
         ConfirmPasswdLabel->setMinimumSize(QSize(0, 25));
         ConfirmPasswdLabel->setMaximumSize(QSize(16777215, 25));
 
         horizontalLayout_7->addWidget(ConfirmPasswdLabel);
 
-        ConfirmPasswdEdit = new QLineEdit(page);
+        ConfirmPasswdEdit = new QLineEdit(layoutWidget);
         ConfirmPasswdEdit->setObjectName("ConfirmPasswdEdit");
         ConfirmPasswdEdit->setMinimumSize(QSize(0, 25));
         ConfirmPasswdEdit->setMaximumSize(QSize(16777215, 25));
 
         horizontalLayout_7->addWidget(ConfirmPasswdEdit);
 
-        ConfirmPasswdVisiable = new ClickedLabel(page);
-        ConfirmPasswdVisiable->setObjectName("ConfirmPasswdVisiable");
-        ConfirmPasswdVisiable->setMinimumSize(QSize(20, 20));
-        ConfirmPasswdVisiable->setMaximumSize(QSize(20, 20));
+        ConfirmPasswdVisible = new ClickedLabel(layoutWidget);
+        ConfirmPasswdVisible->setObjectName("ConfirmPasswdVisible");
+        ConfirmPasswdVisible->setMinimumSize(QSize(20, 20));
+        ConfirmPasswdVisible->setMaximumSize(QSize(20, 20));
 
-        horizontalLayout_7->addWidget(ConfirmPasswdVisiable);
+        horizontalLayout_7->addWidget(ConfirmPasswdVisible);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_7);
+        verticalLayout_4->addLayout(horizontalLayout_7);
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setObjectName("horizontalLayout_8");
-        Codelabel = new QLabel(page);
+        Codelabel = new QLabel(layoutWidget);
         Codelabel->setObjectName("Codelabel");
         Codelabel->setMinimumSize(QSize(0, 25));
         Codelabel->setMaximumSize(QSize(16777215, 25));
 
         horizontalLayout_8->addWidget(Codelabel);
 
-        CodeEdit = new QLineEdit(page);
+        CodeEdit = new QLineEdit(layoutWidget);
         CodeEdit->setObjectName("CodeEdit");
         CodeEdit->setMinimumSize(QSize(0, 25));
         CodeEdit->setMaximumSize(QSize(16777215, 25));
 
         horizontalLayout_8->addWidget(CodeEdit);
 
-        GetCodeButton = new QPushButton(page);
+        GetCodeButton = new TimeBtn(layoutWidget);
         GetCodeButton->setObjectName("GetCodeButton");
         GetCodeButton->setMinimumSize(QSize(0, 25));
         GetCodeButton->setMaximumSize(QSize(16777215, 25));
@@ -212,22 +220,22 @@ public:
         horizontalLayout_8->addWidget(GetCodeButton);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_8);
+        verticalLayout_4->addLayout(horizontalLayout_8);
 
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        verticalLayout_2->addItem(verticalSpacer_2);
+        verticalLayout_4->addItem(verticalSpacer_3);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        ConfirmBtn = new QPushButton(page);
+        ConfirmBtn = new QPushButton(layoutWidget);
         ConfirmBtn->setObjectName("ConfirmBtn");
         ConfirmBtn->setMinimumSize(QSize(0, 25));
         ConfirmBtn->setMaximumSize(QSize(16777215, 25));
 
         horizontalLayout_3->addWidget(ConfirmBtn);
 
-        CancelBtn = new QPushButton(page);
+        CancelBtn = new QPushButton(layoutWidget);
         CancelBtn->setObjectName("CancelBtn");
         CancelBtn->setMinimumSize(QSize(0, 25));
         CancelBtn->setMaximumSize(QSize(16777215, 25));
@@ -235,27 +243,69 @@ public:
         horizontalLayout_3->addWidget(CancelBtn);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_3);
+        verticalLayout_4->addLayout(horizontalLayout_3);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        verticalLayout_2->addItem(verticalSpacer_3);
+        verticalLayout_4->addItem(verticalSpacer_2);
 
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
         verticalLayoutWidget = new QWidget(page_2);
         verticalLayoutWidget->setObjectName("verticalLayoutWidget");
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 261, 321));
+        verticalLayoutWidget->setGeometry(QRect(0, 0, 281, 481));
         verticalLayout_3 = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout_3->setObjectName("verticalLayout_3");
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        verticalLayout_3->addItem(verticalSpacer_5);
+
+        tip_lb = new QLabel(verticalLayoutWidget);
+        tip_lb->setObjectName("tip_lb");
+        tip_lb->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_3->addWidget(tip_lb);
+
+        label_2 = new QLabel(verticalLayoutWidget);
+        label_2->setObjectName("label_2");
+        label_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_3->addWidget(label_2);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        verticalLayout_3->addItem(verticalSpacer_4);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_6->addItem(horizontalSpacer);
+
+        return_btn = new QPushButton(verticalLayoutWidget);
+        return_btn->setObjectName("return_btn");
+
+        horizontalLayout_6->addWidget(return_btn);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_6->addItem(horizontalSpacer_2);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_6);
+
+        verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        verticalLayout_3->addItem(verticalSpacer_6);
+
         stackedWidget->addWidget(page_2);
 
-        verticalLayout->addWidget(stackedWidget);
+        horizontalLayout_9->addWidget(stackedWidget);
 
 
-        horizontalLayout->addLayout(verticalLayout);
+        horizontalLayout->addLayout(horizontalLayout_9);
 
 
         retranslateUi(Register);
@@ -273,13 +323,16 @@ public:
         UserLabel->setText(QCoreApplication::translate("Register", "\347\224\250\346\210\267\357\274\232", nullptr));
         MailLabel->setText(QCoreApplication::translate("Register", "\351\202\256\347\256\261\357\274\232", nullptr));
         PasswdLabel->setText(QCoreApplication::translate("Register", "\345\257\206\347\240\201\357\274\232", nullptr));
-        PasswdVisiable->setText(QString());
+        PasswdVisible->setText(QString());
         ConfirmPasswdLabel->setText(QCoreApplication::translate("Register", "\347\241\256\350\256\244\357\274\232", nullptr));
-        ConfirmPasswdVisiable->setText(QString());
+        ConfirmPasswdVisible->setText(QString());
         Codelabel->setText(QCoreApplication::translate("Register", "\351\252\214\350\257\201\347\240\201\357\274\232", nullptr));
         GetCodeButton->setText(QCoreApplication::translate("Register", "\350\216\267\345\217\226\351\252\214\350\257\201\347\240\201", nullptr));
         ConfirmBtn->setText(QCoreApplication::translate("Register", "\347\241\256\350\256\244", nullptr));
         CancelBtn->setText(QCoreApplication::translate("Register", "\345\217\226\346\266\210", nullptr));
+        tip_lb->setText(QCoreApplication::translate("Register", "\346\263\250\345\206\214\346\210\220\345\212\237, 5s\345\220\216\350\277\224\345\233\236\347\231\273\345\275\225", nullptr));
+        label_2->setText(QCoreApplication::translate("Register", "\345\217\257\347\202\271\345\207\273\344\270\213\346\226\271\346\214\211\351\222\256\347\233\264\346\216\245\350\277\224\345\233\236\347\231\273\345\275\225", nullptr));
+        return_btn->setText(QCoreApplication::translate("Register", "\350\277\224\345\233\236\347\231\273\345\275\225", nullptr));
     } // retranslateUi
 
 };

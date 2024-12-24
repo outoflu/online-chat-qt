@@ -19,7 +19,8 @@ public:
 public slots:
     void slot_switch_register();
     void slot_switch_reset();
-    void slot_swicth_login2();
+    void slot_switch_reset_login();
+    void slot_switch_register_login();
 private:
     Ui::MainWindow *ui;
     Login *_login_w;

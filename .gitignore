@@ -5,3 +5,4 @@ spdlog/*
 /bin
 /debug
 /release
+/build
