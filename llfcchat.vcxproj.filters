@@ -60,6 +60,9 @@
     <ClCompile Include="HttpMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TcpMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="clickedlabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -113,6 +116,9 @@
     <QtMoc Include="timebtn.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="TcpMgr.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -161,6 +167,8 @@
     <None Include="resource\visible_hover.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resource\icon.ico" />
+    <None Include="style\stylesheet.qss" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.ini">

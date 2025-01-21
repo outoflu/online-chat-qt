@@ -87,7 +87,8 @@
       <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
-      <ProgramDataBaseFileName></ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -213,6 +214,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HttpMgr.cpp" />
+    <ClCompile Include="TcpMgr.cpp" />
     <ClCompile Include="clickedlabel.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="login.cpp" />
@@ -225,6 +227,7 @@
   <ItemGroup>
     <QtMoc Include="HttpMgr.h" />
     <ClInclude Include="Singleton.h" />
+    <QtMoc Include="TcpMgr.h" />
     <QtMoc Include="clickedlabel.h" />
     <ClInclude Include="global.h" />
     <QtMoc Include="login.h" />

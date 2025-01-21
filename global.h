@@ -12,13 +12,15 @@
 #include <QSettings>
 
 extern std::function<void(QWidget*)> repolish;
+extern std::function<QString(QString)> xorString;
 
 enum ReqId {
     ID_GET_VARIFY_CODE = 1001,//获取验证码
     ID_REG_USER = 1002,
     ID_LOGIN_USER = 1003,
     ID_RESET_PWD=1004,
-    ID_RESET_USER = 1005
+    ID_RESET_USER = 1005,
+    ID_CHAT_LOGIN =1006
 };
 
 enum Modules{
@@ -49,4 +51,11 @@ enum ClickLbState{
 };
 
 extern QString GateUrlPrefix;
+
+struct ServerInfo {
+    QString Host;
+    QString Port;
+    QString Token;
+    int Uid;
+};
 #endif // GLOBAL_H

@@ -13,6 +13,7 @@ DESTDIR=./bin
 
 SOURCES += \
     HttpMgr.cpp \
+    TcpMgr.cpp \
     clickedlabel.cpp \
     global.cpp \
     login.cpp \
@@ -25,13 +26,15 @@ SOURCES += \
 HEADERS += \
     HttpMgr.h \
     Singleton.h \
+    TcpMgr.h \
     clickedlabel.h \
     global.h \
     login.h \
     mainwindow.h \
     register.h \
     resetdialog.h \
-    timebtn.h
+    timebtn.h \
+    userdata.h
 
 FORMS += \
     login.ui \
